@@ -28,3 +28,6 @@ Bundle 'Shougo/unite.vim'
 Bundle 'thinca/vim-ref'
 Bundle 'thinca/vim-quickrun'
 filetype plugin indent on     " required!
+
+" ファイルをtree表示
+" Plug 'scrooloose/nerdtree'
