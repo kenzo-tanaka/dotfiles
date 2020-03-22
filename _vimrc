@@ -1,4 +1,4 @@
-:set term=xterm-256color
+set term=xterm-256color
 set number
 set title
 set ambiwidth=double
@@ -16,3 +16,15 @@ set whichwrap=b,s,[,],<,>
 set backspace=indent,eol,start
 set wildmenu
 :syntax on
+
+
+set nocompatible
+filetype off
+
+set rtp+=~/dotfiles/vimfiles/vundle.git/
+call vundle#rc()
+Bundle 'Shougo/neocomplcache'
+Bundle 'Shougo/unite.vim'
+Bundle 'thinca/vim-ref'
+Bundle 'thinca/vim-quickrun'
+filetype plugin indent on     " required!
