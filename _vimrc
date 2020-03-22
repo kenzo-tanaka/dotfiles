@@ -27,7 +27,8 @@ Bundle 'Shougo/neocomplcache'
 Bundle 'Shougo/unite.vim'
 Bundle 'thinca/vim-ref'
 Bundle 'thinca/vim-quickrun'
+Bundle 'scrooloose/nerdtree'
+Bundle 'tpope/vim-rails'
+Bundle 'tpope/vim-endwise'
 filetype plugin indent on     " required!
 
-" ファイルをtree表示
-" Plug 'scrooloose/nerdtree'
