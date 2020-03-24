@@ -4,7 +4,7 @@ set title
 set ambiwidth=double
 set tabstop=4
 set expandtab
-set shiftwidth=4
+set shiftwidth=2
 set smartindent
 set list
 set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
@@ -30,5 +30,6 @@ Bundle 'thinca/vim-quickrun'
 Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-endwise'
+Bundle "ctrlpvim/ctrlp.vim"
 filetype plugin indent on     " required!
 
