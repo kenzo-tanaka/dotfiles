@@ -30,6 +30,7 @@ Plug 'Shougo/unite.vim' " ファイルオープンを便利にする
 Plug 'Shougo/neomru.vim' " 最近使ったファイルを表示できるようにする
 Plug 'tomtom/tcomment_vim' " コメントON/OFFを手軽に実行
 Plug 'nathanaelkane/vim-indent-guides' " インデントに色を付けて見やすくする
+Plug 'bronson/vim-trailing-whitespace' " 行末の半角スペースを可視化
 call plug#end()
 """"""""""""""""""""""""""""""
 
@@ -51,3 +52,11 @@ au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 
 " vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
 let g:indent_guides_enable_on_vim_startup = 1
+
+""""""""""""""""""""""""""""""
+" 自動的に閉じ括弧を入力
+""""""""""""""""""""""""""""""
+imap { {}<LEFT>
+imap [ []<LEFT>
+imap ( ()<LEFT>
+""""""""""""""""""""""""""""""
