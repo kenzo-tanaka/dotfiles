@@ -2,9 +2,9 @@ set term=xterm-256color
 set number
 set title
 set ambiwidth=double
-set tabstop=4
-set expandtab
+set tabstop=2
 set shiftwidth=2
+set expandtab
 set smartindent
 set list
 set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
@@ -21,15 +21,33 @@ set wildmenu
 set nocompatible
 filetype off
 
-set rtp+=~/dotfiles/vimfiles/vundle.git/
-call vundle#rc()
-Bundle 'Shougo/neocomplcache'
-Bundle 'Shougo/unite.vim'
-Bundle 'thinca/vim-ref'
-Bundle 'thinca/vim-quickrun'
-Bundle 'scrooloose/nerdtree'
-Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-endwise'
-Bundle "ctrlpvim/ctrlp.vim"
-filetype plugin indent on     " required!
+""""""""""""""""""""""""""""""
+" プラグインのセットアップ
+""""""""""""""""""""""""""""""
+call plug#begin('~/.vim/plugged')
 
+Plug 'Shougo/unite.vim' " ファイルオープンを便利にする
+Plug 'Shougo/neomru.vim' " 最近使ったファイルを表示できるようにする
+Plug 'tomtom/tcomment_vim' " コメントON/OFFを手軽に実行
+Plug 'nathanaelkane/vim-indent-guides' " インデントに色を付けて見やすくする
+call plug#end()
+""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""
+" Unit.vimの設定
+""""""""""""""""""""""""""""""
+" 入力モードで開始する
+let g:unite_enable_start_insert=1
+" バッファ一覧
+noremap <C-P> :Unite buffer<CR>
+" ファイル一覧
+noremap <C-N> :Unite -buffer-name=file file<CR>
+" 最近使ったファイルの一覧
+noremap <C-Z> :Unite file_mru<CR>
+" ESCキーを2回押すと終了する
+au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
+au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
+"""""""""""""""""""""""""""""
+
+" vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
+let g:indent_guides_enable_on_vim_startup = 1
