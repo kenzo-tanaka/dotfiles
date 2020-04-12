@@ -17,9 +17,9 @@ set backspace=indent,eol,start
 set wildmenu
 :syntax on
 
-
 set nocompatible
 filetype off
+filetype plugin on
 
 """"""""""""""""""""""""""""""
 " プラグインのセットアップ
@@ -31,6 +31,7 @@ Plug 'Shougo/neomru.vim' " 最近使ったファイルを表示できるよう�
 Plug 'tomtom/tcomment_vim' " コメントON/OFFを手軽に実行
 Plug 'nathanaelkane/vim-indent-guides' " インデントに色を付けて見やすくする
 Plug 'bronson/vim-trailing-whitespace' " 行末の半角スペースを可視化
+Plug 'tpope/vim-endwise'
 call plug#end()
 """"""""""""""""""""""""""""""
 
