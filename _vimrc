@@ -37,6 +37,9 @@ Plug 'tpope/vim-endwise'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
+" Git関連
+Plug 'tpope/vim-fugitive'
+
 call plug#end()
 """"""""""""""""""""""""""""""
 
