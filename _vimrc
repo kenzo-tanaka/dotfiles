@@ -33,6 +33,7 @@ Plug 'nathanaelkane/vim-indent-guides' " インデントに色を付けて見や
 Plug 'bronson/vim-trailing-whitespace' " 行末の半角スペースを可視化
 Plug 'tpope/vim-endwise'
 
+" 検索関連
 " @see: https://techracho.bpsinc.jp/jhonda/2019_12_24/85173
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
