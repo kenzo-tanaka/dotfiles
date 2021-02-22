@@ -5,7 +5,7 @@ else
     PS1="\[\033[36m\]\u@\h\[\033[00m\]:\[\033[01m\]\w\[\033[00m\]\\$ "
 fi
 
-# ターミナルの出力を変える
+# bash prompt settings
 export PS1="\W \$ "
 
 alias today='date "+%Y%m%d"'
@@ -21,6 +21,10 @@ alias gco='git commit'
 alias gre='git reset --soft head^'
 alias gfm='git fetch; gd master; gcb master origin/master'
 alias gfmd='gfm; git branch | grep / |  while read branch ; do git branch -D ${branch} ; done ;'
+
+alias gfmain='git fetch; gd main; gcb main origin/main'
+alias gfmaind='gfmain; git branch | grep / |  while read branch ; do git branch -D ${branch} ; done ;'
+
 alias rubo='rubocop --auto-correct'
 alias gcom='git commit -m'
 alias gr='git remote -v'
