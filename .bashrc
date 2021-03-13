@@ -43,6 +43,8 @@ alias gp='git push origin head'
 # main branch
 alias gfmain='git fetch; gd main; gcb main origin/main'
 alias gfmaind='gfmain; git branch | grep / |  while read branch ; do git branch -D ${branch} ; done ;'
+# hub
+alias hbi='hub browse -- issues'
 
 # Ruby, Ruby on Rails関連
 alias rubo='rubocop --auto-correct'
