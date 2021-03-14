@@ -16,6 +16,7 @@ export PS1="\W \[\e[91m\]\$(parse_git_branch)\[\e[00m\]$ "
 alias today='date "+%Y%m%d"'
 alias personal='cd ~/Documents/personal'
 alias work='cd ~/Documents/work'
+alias pr='bash create-pr.sh'
 alias ls='ls -F'
 alias dockb='docker-compose build'
 alias docku='docker-compose up'
