@@ -6,10 +6,10 @@ branch=$(git symbolic-ref --short HEAD)
 
 # ブランチ名からIssue番号を取り出す
 if [[ ${branch} =~ [0-9]{1,10} ]]; then
-  issue=${BASH_REMATCH[0]}
+  issue_num=${BASH_REMATCH[0]}
 fi
 
 # GitHub CLIでPRを作成する
 # TODO: IssueのタイトルをPRのタイトルにする
-gh pr create --title "Close $issue" --body "close #$issue"
+gh pr create --title "Close $issue_num" --body "close #$issue_num"
 echo "PR created!"
