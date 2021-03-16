@@ -16,5 +16,5 @@ fi
 
 # GitHub CLIでPRを作成する
 # TODO: IssueのタイトルをPRのタイトルにする
-gh pr create --title "$1" --body "close #$issue_num"
+gh pr create --title "$1" --body "close #$issue_num" -a kenzo-tanaka
 echo "PR created!"
