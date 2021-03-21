@@ -31,8 +31,6 @@ function peco-history-selection() {
 zle -N peco-history-selection
 bindkey '^R' peco-history-selection
 
-# ブランチを簡単切り替え。git checkout lbで実行できる
-alias -g lb='`git branch | peco --prompt "GIT BRANCH>" | head -n 1 | sed -e "s/^\*\s*//g"`'
 
 alias today='date "+%Y%m%d"'
 alias personal='cd ~/Documents/personal'
@@ -41,24 +39,25 @@ alias pr='bash ~/dotfiles/utils/create-pr.sh'
 alias ls='ls -F'
 
 # Git関連
-alias gst='git status'
-alias gdiff='git diff'
-alias gco='git commit'
-alias gre='git reset --soft head^'
-alias gfm='git fetch; gd master; gcb master origin/master'
-alias gfmd='gfm; git branch | grep / |  while read branch ; do git branch -D ${branch} ; done ;'
-alias gcom='git commit -m'
-alias gr='git remote -v'
-alias gc='git checkout'
-alias gm='git checkout master'
-alias gcb='git checkout -b'
-alias gl='git log'
-alias gb='git branch'
-alias gac='git add .; git commit'
-alias gpull='git pull origin master'
-alias gd='git branch -D'
-alias ga='git add .'
-alias gp='git push origin head'
+# ブランチを簡単切り替え。git checkout lbで実行できる
+alias -g lb='`git branch | peco --prompt "GIT BRANCH>" | head -n 1 | sed -e "s/^\*\s*//g"`'
+alias -g gc='git checkout'
+alias -g gclb='git checkout lb'
+alias -g gst='git status'
+alias -g gdiff='git diff'
+alias -g gco='git commit'
+alias -g gre='git reset --soft head^'
+alias -g gfm='git fetch; gd master; gcb master origin/master'
+alias -g gfmd='gfm; git branch | grep / |  while read branch ; do git branch -D ${branch} ; done ;'
+alias -g gcom='git commit -m'
+alias -g gr='git remote -v'
+alias -g gm='git checkout master'
+alias -g gcb='git checkout -b'
+alias -g gl='git log'
+alias -g gb='git branch'
+alias -g gd='git branch -D'
+alias -g ga='git add .'
+alias -g gp='git push origin head'
 # main branch
 alias gfmain='git fetch; gd main; gcb main origin/main'
 alias gfmaind='gfmain; git branch | grep / |  while read branch ; do git branch -D ${branch} ; done ;'
