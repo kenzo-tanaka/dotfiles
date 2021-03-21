@@ -37,8 +37,7 @@ alias -g lb='`git branch | peco --prompt "GIT BRANCH>" | head -n 1 | sed -e "s/^
 alias today='date "+%Y%m%d"'
 alias personal='cd ~/Documents/personal'
 alias work='cd ~/Documents/work'
-# TODO: not foundになるので要対応
-alias pr='bash ~/dotfiles/create-pr.sh'
+alias pr='bash ~/dotfiles/utils/create-pr.sh'
 alias ls='ls -F'
 
 # Git関連
