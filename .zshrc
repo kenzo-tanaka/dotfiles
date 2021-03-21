@@ -6,12 +6,12 @@ function git_branch_name()
   then
     :
   else
-    echo $branch
+    echo ' ('$branch')'
   fi
 }
 setopt prompt_subst
 
-PROMPT='%F{green}%*%f: %F{blue}%~%f%F{red}($(git_branch_name))%f $ '
+PROMPT='%F{green}%*%f: %F{blue}%1d%f%F{red}$(git_branch_name)%f $ '
 
 # peco settings
 function peco-history-selection() {
