@@ -1,5 +1,5 @@
 # history
-#pecoでhistory検索
+# pecoでhistory検索
 # peco settings
 # 過去に実行したコマンドを選択。ctrl-rにバインド
 function peco-select-history() {
