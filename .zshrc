@@ -73,8 +73,8 @@ alias ann='bundle exec annotate'
 alias rc='bin/rails c'
 alias rs='bin/rails s'
 
-# bash関連
 alias sz='source ~/.zshrc'
+alias pathes='echo "${PATH//:/\n}"'
 
 # ターミナル操作
 alias cl='clear'
