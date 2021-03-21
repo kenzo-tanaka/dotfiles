@@ -65,7 +65,6 @@ alias cl='clear'
 alias ex='exit'
 
 # pecoの設定
-# zshをログインシェルにしたとき bind の箇所で not found 
 # ref: https://qiita.com/omega999/items/8717c1b9d8bc10596d67
 export HISTCONTROL="ignoredups"
 peco-history() {
