@@ -1,3 +1,6 @@
+# prompt
+PROMPT='%F{green}%*%f:%F{blue}%~%f$ '
+
 # peco settings
 function peco-history-selection() {
     BUFFER=`history -n 1 | tail -r  | awk '!a[$0]++' | peco`
@@ -57,5 +60,3 @@ alias sz='source ~/.zshrc'
 # ターミナル操作
 alias cl='clear'
 alias ex='exit'
-
-export PS1="%~ %n "
