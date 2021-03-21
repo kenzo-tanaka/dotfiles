@@ -75,6 +75,7 @@ alias rs='bin/rails s'
 
 alias sz='source ~/.zshrc'
 alias pathes='echo "${PATH//:/\n}"'
+alias curlp='(){ curl $1 | json_pp }'
 
 # ターミナル操作
 alias cl='clear'
