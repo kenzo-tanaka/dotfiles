@@ -1,4 +1,6 @@
-# prompt
+## ----------------------------------------
+##  Prompt
+## ----------------------------------------
 function git_branch_name()
 {
   branch=$(git symbolic-ref HEAD 2> /dev/null | awk 'BEGIN{FS="/"} {print $NF}')
@@ -13,16 +15,19 @@ setopt prompt_subst
 
 PROMPT='%F{green}%*%f: %F{blue}%1d%f%F{red}$(git_branch_name)%f $ '
 
-# history
+## ----------------------------------------
+##  History
+## ----------------------------------------
 HISTFILE=$HOME/.zsh-history
 HISTSIZE=100000
 SAVEHIST=1000000
 
-# share .zshhistory
 setopt inc_append_history
 setopt share_history
 
-# peco settings
+## ----------------------------------------
+##  Peco
+## ----------------------------------------
 function peco-history-selection() {
     BUFFER=`history -n 1 | tail -r  | awk '!a[$0]++' | peco`
     CURSOR=$#BUFFER
@@ -38,8 +43,9 @@ alias work='cd ~/Documents/work'
 alias pr='bash ~/dotfiles/utils/create-pr.sh'
 alias ls='ls -F'
 
-# Git関連
-# ブランチを簡単切り替え。git checkout lbで実行できる
+## ----------------------------------------
+##  Git alias
+## ----------------------------------------
 alias -g lb='`git branch | peco --prompt "GIT BRANCH>" | head -n 1 | sed -e "s/^\*\s*//g"`'
 alias -g gc='git checkout'
 alias -g gclb='git checkout lb'
@@ -58,14 +64,14 @@ alias -g gb='git branch'
 alias -g gd='git branch -D'
 alias -g ga='git add .'
 alias -g gp='git push origin head'
-# main branch
 alias gfmain='git fetch; gd main; gcb main origin/main'
 alias gfmaind='gfmain; git branch | grep / |  while read branch ; do git branch -D ${branch} ; done ;'
-# hub
 alias hb='hub browse'
 alias hbi='hub browse -- issues'
 
-# Ruby, Ruby on Rails関連
+## ----------------------------------------
+##  Ruby, Ruby on Rails
+## ----------------------------------------
 alias rubo='rubocop --auto-correct'
 alias spec='bundle exec rspec'
 alias mig='rails db:migrate'
@@ -77,6 +83,10 @@ alias sz='source ~/.zshrc'
 alias pathes='echo "${PATH//:/\n}"'
 alias curlp='(){ curl $1 | json_pp }'
 
-# ターミナル操作
 alias cl='clear'
 alias ex='exit'
+
+## ----------------------------------------
+##  zsh-autosuggestions
+## ----------------------------------------
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
