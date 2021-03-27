@@ -85,3 +85,8 @@ alias curlp='(){ curl $1 | json_pp }'
 
 alias cl='clear'
 alias ex='exit'
+
+## ----------------------------------------
+##  zsh-autosuggestions
+## ----------------------------------------
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
