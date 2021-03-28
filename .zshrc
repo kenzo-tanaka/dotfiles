@@ -90,3 +90,5 @@ alias ex='exit'
 ##  zsh-autosuggestions
 ## ----------------------------------------
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+eval "$(rbenv init -)"
