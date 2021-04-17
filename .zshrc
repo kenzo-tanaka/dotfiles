@@ -41,6 +41,7 @@ alias today='date "+%Y%m%d"'
 alias personal='cd ~/Documents/personal'
 alias work='cd ~/Documents/work'
 alias pr='bash ~/dotfiles/utils/create-pr.sh'
+alias airpods='bash ~/dotfiles/utils/connect-airpods.sh'
 alias ls='ls -F'
 
 ## ----------------------------------------
