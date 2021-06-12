@@ -42,6 +42,7 @@ alias personal='cd ~/Documents/personal'
 alias work='cd ~/Documents/work'
 alias pr='bash ~/dotfiles/utils/create-pr.sh'
 alias airpods='bash ~/dotfiles/utils/connect-airpods.sh'
+alias cv-img='bash ~/dotfiles/utils/convert-img.sh'
 alias ls='ls -F'
 
 ## ----------------------------------------
