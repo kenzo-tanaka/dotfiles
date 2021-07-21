@@ -21,6 +21,7 @@ pr "title"
 - [fikovnik/ShiftIt](https://github.com/fikovnik/ShiftIt/releases)
 - [Karabiner-Elements](https://karabiner-elements.pqrs.org/)
   - Settings: [USキーボードで入力ソースを簡単に切り替える](https://zenn.dev/takeucheese/articles/1ee9b7e09c26fd)
+- [Homebrew](https://brew.sh/index_ja)
 
 ```shell
 # zsh-autosuggestions
@@ -33,3 +34,7 @@ brew install yarn
 brew install gh
 ```
 
+## Ruby, Rails
+
+- [【完全版】MacでRails環境構築する手順の全て - Qiita](https://qiita.com/kodai_0122/items/56168eaec28eb7b1b93b)
+  - Bug: [gem install をしようとしたらOperation not permitted がでた。。 | ハックノート](https://hacknote.jp/archives/28037/)
