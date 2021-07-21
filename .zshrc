@@ -91,7 +91,7 @@ alias ex='exit'
 ## ----------------------------------------
 ##  zsh-autosuggestions
 ## ----------------------------------------
-# source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 eval "$(rbenv init -)"
 export PATH="$HOME/.cargo/bin:$PATH"
