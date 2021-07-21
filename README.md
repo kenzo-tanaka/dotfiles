@@ -38,6 +38,7 @@ brew install gh
 ## Hard
 
 - [Pairing problem with Logitech MX Ergo tra… - Apple Community](https://discussions.apple.com/thread/251775696)
+  - システム環境設定からスクロール方向からナチュラルを外しておくと、トラックパッドと同じ感じにできる
 
 ## Ruby, Rails
 
