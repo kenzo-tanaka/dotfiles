@@ -10,3 +10,7 @@ cd ~/dotfiles
 pr "title"
 ```
 
+```shell
+brew install yarn
+```
+
