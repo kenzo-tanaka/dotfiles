@@ -19,6 +19,8 @@ pr "title"
 - [Google Chrome - Google の高速で安全なブラウザをダウンロード](https://www.google.com/chrome/)
 - [BettorTouch Tool](https://folivora.ai/)
 - [fikovnik/ShiftIt](https://github.com/fikovnik/ShiftIt/releases)
+- [Karabiner-Elements](https://karabiner-elements.pqrs.org/)
+  - Settings: [USキーボードで入力ソースを簡単に切り替える](https://zenn.dev/takeucheese/articles/1ee9b7e09c26fd)
 
 ```shell
 # zsh-autosuggestions
