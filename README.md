@@ -35,6 +35,10 @@ brew install yarn
 brew install gh
 ```
 
+## Hard
+
+- [Pairing problem with Logitech MX Ergo tra… - Apple Community](https://discussions.apple.com/thread/251775696)
+
 ## Ruby, Rails
 
 - [【完全版】MacでRails環境構築する手順の全て - Qiita](https://qiita.com/kodai_0122/items/56168eaec28eb7b1b93b)
