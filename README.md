@@ -1,4 +1,5 @@
 ```shell
+# 実行権限を付与
 chmod +x dotfiles/setup.sh
 cd ~/dotfiles
 ./setup.sh # シンボリックリンクを貼る
