@@ -25,6 +25,7 @@ pr "title"
   - Settings: [USキーボードで入力ソースを簡単に切り替える](https://zenn.dev/takeucheese/articles/1ee9b7e09c26fd)
 - [Homebrew](https://brew.sh/index_ja)
 - [Docker Desktop for Mac by Docker | Docker Hub](https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
+- [Git Automator [V3 PREVIEW] - Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=ivangabriele.vscode-git-automator)
 
 ```shell
 # zsh-autosuggestions
