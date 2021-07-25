@@ -81,6 +81,12 @@ alias ann='bundle exec annotate'
 alias rc='bin/rails c'
 alias rs='bin/rails s'
 
+## ----------------------------------------
+##  Python3
+## ----------------------------------------
+
+alias p3='python3'
+
 alias sz='source ~/.zshrc'
 alias pathes='echo "${PATH//:/\n}"'
 alias curlp='(){ curl $1 | json_pp }'
