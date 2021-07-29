@@ -26,6 +26,7 @@ pr "title"
 - [Homebrew](https://brew.sh/index_ja)
 - [Docker Desktop for Mac by Docker | Docker Hub](https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
 - [Git Automator [V3 PREVIEW] - Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=ivangabriele.vscode-git-automator)
+- [Download Figma Desktop Apps, Mobile Apps, and Font Installers](https://www.figma.com/downloads/)
 
 ```shell
 # zsh-autosuggestions
