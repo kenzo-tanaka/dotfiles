@@ -44,6 +44,12 @@ python get-pip.py
 which pip3
 ```
 
+## Trouble shooting
+
+`npm install --global`でインストールしたけれど動かないという場合は、下記の手順を実行。
+
+[Resolving EACCES permissions errors when installing packages globally | npm Docs](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally#manually-change-npms-default-directory)
+
 ## Hard
 
 - [Pairing problem with Logitech MX Ergo tra… - Apple Community](https://discussions.apple.com/thread/251775696)

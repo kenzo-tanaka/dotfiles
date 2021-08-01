@@ -101,3 +101,6 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 eval "$(rbenv init -)"
 export PATH="$HOME/.cargo/bin:$PATH"
+
+# npm install -g でインストールしたものを動かす
+export PATH=~/.npm-global/bin:$PATH
