@@ -27,6 +27,7 @@ pr "title"
 - [Docker Desktop for Mac by Docker | Docker Hub](https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
 - [Git Automator [V3 PREVIEW] - Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=ivangabriele.vscode-git-automator)
 - [Download Figma Desktop Apps, Mobile Apps, and Font Installers](https://www.figma.com/downloads/)
+- [SSH について - GitHub Docs](https://docs.github.com/ja/github/authenticating-to-github/connecting-to-github-with-ssh/about-ssh)
 - [VS Codeでファイル末尾に自動的に改行を挿入する設定 - Qiita](https://qiita.com/norikt/items/83674fadd79a88bf7824)
 
 ```shell
