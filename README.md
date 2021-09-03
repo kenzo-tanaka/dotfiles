@@ -54,11 +54,6 @@ which pip3
 
 [Resolving EACCES permissions errors when installing packages globally | npm Docs](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally#manually-change-npms-default-directory)
 
-## Hard
-
-- [Pairing problem with Logitech MX Ergo tra… - Apple Community](https://discussions.apple.com/thread/251775696)
-  - システム環境設定からスクロール方向からナチュラルを外しておくと、トラックパッドと同じ感じにできる
-
 ## Ruby, Rails
 
 - [【完全版】MacでRails環境構築する手順の全て - Qiita](https://qiita.com/kodai_0122/items/56168eaec28eb7b1b93b)
