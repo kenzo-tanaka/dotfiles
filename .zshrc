@@ -53,23 +53,28 @@ alias -g gc='git checkout'
 alias -g gclb='git checkout lb'
 alias -g gst='git status'
 alias -g gdiff='git diff'
-alias -g gco='git commit'
+
+# https://speakerdeck.com/koic/tdd-with-git-long-live-engineering?slide=62
+alias -g ga='git add .'
+alias -g gco='ga;git commit'
+alias -g gcf='ga;git commit -v --fixup=HEAD'
+alias -g gri='(){git rebase -i --autosquash HEAD~$1}'
+
 alias -g gre='git reset --soft head^'
 alias -g gfm='git fetch; gd master; gcb master origin/master'
 alias -g gfmd='gfm; git branch | grep / |  while read branch ; do git branch -D ${branch} ; done ;'
-alias -g gcom='git commit -m'
 alias -g gr='git remote -v'
 alias -g gm='git checkout master'
 alias -g gcb='git checkout -b'
 alias -g gl='git log'
 alias -g gb='git branch'
 alias -g gd='git branch -D'
-alias -g ga='git add .'
 alias -g gp='git push origin head'
 alias gfmain='git fetch; gd main; gcb main origin/main'
 alias gfmaind='gfmain; git branch | grep / |  while read branch ; do git branch -D ${branch} ; done ;'
 alias hb='hub browse'
 alias hbi='hub browse -- issues'
+
 
 ## ----------------------------------------
 ##  Ruby, Ruby on Rails
