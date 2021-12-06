@@ -2,12 +2,26 @@
 
 set -e
 
-if [ ! -f /usr/local/bin/brew ]; then
+if [ -f /usr/local/bin/brew ]; then
+    echo 'brew already installed.'
+else
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
 if [ -f /usr/local/bin/peco ]; then
-    echo 'peco already exists.'
+    echo 'peco already installed.'
 else
    brew install peco 
+fi
+
+if [ -f /usr/local/bin/gh ]; then
+    echo 'gh already installed.'
+else
+    brew install gh
+fi
+
+if [ -d ~/.zsh/zsh-autosuggestions ]; then
+    echo 'zsh-autosuggestions already exists.'
+else
+    git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
 fi
