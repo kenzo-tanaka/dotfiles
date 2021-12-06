@@ -37,15 +37,6 @@ pr "title"
 - [VS Codeでファイル末尾に自動的に改行を挿入する設定 - Qiita](https://qiita.com/norikt/items/83674fadd79a88bf7824)
 
 ```shell
-# zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
-# peco
-brew install peco
-# yarn
-brew install yarn
-# gh: GitHub cli 
-brew install gh
-
 # pip: https://pip.pypa.io/en/stable/installing/
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python get-pip.py
