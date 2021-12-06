@@ -16,6 +16,7 @@ pr "title"
 - [Alfred - Productivity App for macOS](https://www.alfredapp.com/)
 - [Download RubyMine: Ruby and Rails IDE by JetBrains](https://www.jetbrains.com/ruby/download/#section=mac)
   - Keymap: [RubyMine 設定の エクスポート/インポート 方法 (IntelliJ共通) - Qiita](https://qiita.com/k-waragai/items/2922fe32b898d670393d#how-to-github%E3%81%AB%E7%99%BB%E9%8C%B2%E3%81%97%E5%8B%9D%E6%89%8B%E3%81%ABsync%E3%81%95%E3%81%9B%E3%82%8B)
+    ![スクリーンショット 2021-12-06 18 47 21](https://user-images.githubusercontent.com/33926355/144824455-6a4e1f3c-f39d-4bb0-93a9-4daedb76fb87.png)
   - [GitHub | RubyMine](https://pleiades.io/help/ruby/github.html)
   > トークンの repo、gist、および read:org スコープがアカウント権限で有効になっている必要があります（スコープの理解(英語)を参照）。
 - [Download Visual Studio Code - Mac, Linux, Windows](https://code.visualstudio.com/download)
