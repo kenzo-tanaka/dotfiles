@@ -105,7 +105,7 @@ alias ex='exit'
 ## ----------------------------------------
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-eval "$(rbenv init -)"
+# eval "$(rbenv init -)"
 export PATH="$HOME/.cargo/bin:$PATH"
 
 # npm install -g でインストールしたものを動かす
@@ -114,3 +114,7 @@ export PATH=~/.npm-global/bin:$PATH
 # curl実行時にno matches found解消のため
 # @see https://unix.stackexchange.com/a/310553 
 setopt +o nomatch
+
+
+export PATH="$PATH:/opt/homebrew/bin"
+
