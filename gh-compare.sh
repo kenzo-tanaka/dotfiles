@@ -1,7 +1,7 @@
 #!/bin/bash
 
 REMOTE=`git config --get remote.origin.url`
-FROM_COMMIT=`git rev-parse HEAD~3`
+FROM_COMMIT=`git rev-parse HEAD~$1`
 TO_COMMIT=`git rev-parse HEAD`
 
 if [[ ${REMOTE} =~ ^https ]]; then
