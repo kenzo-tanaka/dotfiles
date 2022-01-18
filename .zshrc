@@ -118,3 +118,10 @@ setopt +o nomatch
 
 export PATH="$PATH:/opt/homebrew/bin"
 
+# GOPATH
+export GOPATH=$HOME/.go
+
+
+
+
+
