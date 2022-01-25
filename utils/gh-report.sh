@@ -11,4 +11,6 @@ comitter=$1
 
 # e.g. - [#1 title](https://github.com/test/pull/1)
 md_list_format='"- [#" + (.number|tostring) + " " +  .title + "](" + .url + ")"'
-gh pr list -a $1 --state closed --json url,title,number -q ".[] | .result = $md_list_format | .result"
+monday=$(date -vMonw "+%Y-%m-%d")
+friday=$(date -vFriw "+%Y-%m-%d")
+gh pr list -a $1 --search "closed:$monday..$friday" --state closed --json url,title,number -q ".[] | .result = $md_list_format | .result"
