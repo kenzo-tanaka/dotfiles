@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# TODO: gh command check
-
 if [ $# != 1 ]; then
   echo 'コミッター名を指定してください。'
   exit 1
