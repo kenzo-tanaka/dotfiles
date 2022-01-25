@@ -9,8 +9,10 @@ function closed_pull_requests() {
   md_list_format='"- [#" + (.number|tostring) + " " +  .title + "](" + .url + ")"'
   monday=$(date -vMonw "+%Y-%m-%d")
   friday=$(date -vFriw "+%Y-%m-%d")
-  
-  gh pr list -a $1 --search "closed:$monday..$friday" --state closed --json url,title,number -q ".[] | .result = $md_list_format | .result"
+  committer_name=$1
+
+  echo $committer_name
+  gh pr list -a $committer_name --search "closed:$monday..$friday" --state closed --json url,title,number -q ".[] | .result = $md_list_format | .result"
 }
 
 committers=("$@")
