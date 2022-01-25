@@ -11,7 +11,7 @@ function closed_pull_requests() {
   friday=$(date -vFriw "+%Y-%m-%d")
   committer_name=$1
 
-  echo "\n"$committer_name"\n"
+  echo -e "\n""$committer_name""\n"
   gh pr list -a $committer_name --search "closed:$monday..$friday" --state closed --json url,title,number -q ".[] | .result = $md_list_format | .result"
 }
 
