@@ -118,3 +118,6 @@ export PATH="$PATH:/opt/homebrew/bin"
 
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init - zsh)"
+
+# GOPATH
+export GOPATH=$HOME/.go
