@@ -86,6 +86,7 @@ alias mig='rails db:migrate'
 alias ann='bundle exec annotate'
 alias rc='bin/rails c'
 alias rs='bin/rails s'
+alias b='bundle exec'
 
 ## ----------------------------------------
 ##  Python3
