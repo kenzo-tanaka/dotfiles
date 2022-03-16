@@ -6,13 +6,13 @@ if [ $# == 0 ]; then
 fi
 
 function pull_requests() {
-  md_list_format='"- #" + (.number|tostring) + " " +  .title + "[done]"'
+  md_list_format='"- #" + (.number|tostring) + " " +  .title + " [" + .state + "]"'
   monday=$(date -vMonw "+%Y-%m-%d")
   friday=$(date -vFriw "+%Y-%m-%d")
   committer_name=$1
 
   echo -e "\n""$committer_name""\n"
-  gh pr list -A $committer_name --search "closed:$monday..$friday" --state closed --json url,title,number -q ".[] | .result = $md_list_format | .result"
+  gh pr list -A $committer_name --search "closed:$monday..$friday" --state closed --json url,title,number,state -q ".[] | .result = $md_list_format | .result"
 }
 
 committers=("$@")
