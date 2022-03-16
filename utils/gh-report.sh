@@ -13,7 +13,7 @@ function closed_pull_requests() {
   committer_name=$1
 
   echo -e "\n""$committer_name""\n"
-  gh pr list -a $committer_name --search "closed:$monday..$friday" --state closed --json url,title,number -q ".[] | .result = $md_list_format | .result"
+  gh pr list -A $committer_name --search "closed:$monday..$friday" --state closed --json url,title,number -q ".[] | .result = $md_list_format | .result"
 }
 
 committers=("$@")
