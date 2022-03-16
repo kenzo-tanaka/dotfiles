@@ -5,7 +5,7 @@ if [ $# == 0 ]; then
   exit 1
 fi
 
-function closed_pull_requests() {
+function pull_requests() {
   md_list_format='"- #" + (.number|tostring) + " " +  .title + "[done]"'
   monday=$(date -vMonw "+%Y-%m-%d")
   friday=$(date -vFriw "+%Y-%m-%d")
@@ -20,5 +20,5 @@ committers_length=$#
 
 for i in $(seq $committers_length)
 do
-  closed_pull_requests ${committers[$i-1]}
+  pull_requests ${committers[$i-1]}
 done
