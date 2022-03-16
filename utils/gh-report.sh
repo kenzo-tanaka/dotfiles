@@ -6,7 +6,7 @@ if [ $# == 0 ]; then
 fi
 
 function closed_pull_requests() {
-  md_list_format='"- #" + (.number|tostring) + " " +  .title'
+  md_list_format='"- #" + (.number|tostring) + " " +  .title + "[done]"'
   monday=$(date -vMonw "+%Y-%m-%d")
   friday=$(date -vFriw "+%Y-%m-%d")
   committer_name=$1
