@@ -42,10 +42,10 @@ opt.parse(ARGV)
 # コミッターをコマンドライン引数から取得
 users = options[:users].split(',')
 
-users.each do |user|
-  input = `gh pr list -A #{user} --search "merged:2022-03-15" --state merged --json url,title,createdAt,mergedAt`
+users.each do |name|
+  input = `gh pr list -A #{name} --search "merged:2022-03-15" --state merged --json url,title,createdAt,mergedAt`
   pull_requests = JSON.parse input
-  p = Person.new(name: 'kenzo-tanaka', pull_requests: pull_requests)
+  p = Person.new(name: name, pull_requests: pull_requests)
   puts p.summary_text
 end
 
