@@ -37,13 +37,17 @@ end
 opt = OptionParser.new
 options = {}
 opt.on('-u', '--users USERS', 'user list') { |v| options[:users] = v }
+opt.on('-f', '--from DATE', 'from date') { |v| options[:from] = v }
+opt.on('-t', '--to DATE', 'to date') { |v| options[:to] = v }
 opt.parse(ARGV)
 
 # コミッターをコマンドライン引数から取得
 users = options[:users].split(',')
+from = options[:from]
+to = options[:to]
 
 users.each do |name|
-  input = `gh pr list -A #{name} --search "merged:2022-03-15" --state merged --json url,title,createdAt,mergedAt`
+  input = `gh pr list -A #{name} --search "merged:#{from}..#{to}" --state merged --json url,title,createdAt,mergedAt`
   pull_requests = JSON.parse input
   p = Performance.new(name: name, pull_requests: pull_requests)
   puts p.summary_text
