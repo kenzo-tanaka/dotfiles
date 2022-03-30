@@ -8,10 +8,13 @@ options = {}
 opt.on('-u', '--user ITEM', 'user list') { |v| options[:users] = v }
 opt.parse(ARGV)
 
-p options
+# コミッターをコマンドライン引数から取得
+users = options[:users].split(',')
 
-# input = `gh pr list -A kenzo-tanaka --search "merged:2022-03-15" --state merged --json url,title,createdAt,mergedAt`
-# results = JSON.parse(input)
+users.each do |user|
+  input = `gh pr list -A #{user} --search "merged:2022-03-15" --state merged --json url,title,createdAt,mergedAt`
+  results = JSON.parse input
+end
 
 # class Person
 #   def initialize(name:, pull_requests:)
