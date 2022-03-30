@@ -2,7 +2,7 @@ require 'json'
 require 'time'
 require 'optparse'
 
-class Person
+class Performance
   def initialize(name:, pull_requests:)
     @name = name
     @pull_requests = pull_requests
@@ -46,7 +46,7 @@ users = options[:users].split(',')
 users.each do |name|
   input = `gh pr list -A #{name} --search "merged:2022-03-15" --state merged --json url,title,createdAt,mergedAt`
   pull_requests = JSON.parse input
-  p = Person.new(name: name, pull_requests: pull_requests)
+  p = Performance.new(name: name, pull_requests: pull_requests)
   puts p.summary_text
 end
 
