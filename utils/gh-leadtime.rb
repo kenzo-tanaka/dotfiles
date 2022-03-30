@@ -36,8 +36,7 @@ end
 
 opt = OptionParser.new
 options = {}
-# TODO: 指定されていなかったら弾く
-opt.on('-u', '--user ITEM', 'user list') { |v| options[:users] = v }
+opt.on('-u', '--users USERS', 'user list') { |v| options[:users] = v }
 opt.parse(ARGV)
 
 # コミッターをコマンドライン引数から取得
