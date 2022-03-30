@@ -5,6 +5,7 @@ require 'optparse'
 
 opt = OptionParser.new
 options = {}
+# TODO: 指定されていなかったら弾く
 opt.on('-u', '--user ITEM', 'user list') { |v| options[:users] = v }
 opt.parse(ARGV)
 
