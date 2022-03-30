@@ -10,8 +10,9 @@ class Person
 
   def summary_text
     result = "#{@name}\n"
-    leadtime = 0
+    return result if @pull_requests.length == 0
 
+    leadtime = 0
     @pull_requests.each do |pull_request|
       text = <<~TEXT
         - #{pull_request['title']} (lead time: #{lead_time(pull_request)} hour)
