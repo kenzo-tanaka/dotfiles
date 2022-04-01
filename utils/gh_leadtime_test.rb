@@ -31,8 +31,8 @@ class Performance
   end
 end
 
-class SampleTest < Minitest::Test
-  def test_1
+class PullRequestTest < Minitest::Test
+  def test_leadtime
     pull_request = {
       "createdAt" => "2022-03-14T12:04:03Z",
       "mergedAt" => "2022-03-15T05:29:21Z",
