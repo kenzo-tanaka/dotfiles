@@ -2,35 +2,32 @@ require 'minitest/autorun'
 require 'json'
 require 'time'
 
+class PullRequest
+  def initialize(data:)
+    @data = data
+  end
+
+  def lead_time
+    ((merged_at - created_at) / 3600).floor 2
+  end
+
+  def merged_at
+    Time.parse @data['mergedAt']
+  end
+
+  def created_at
+    Time.parse @data['createdAt']
+  end
+end
+
 class Performance
   def initialize(name:, pull_requests:)
     @name = name
     @pull_requests = pull_requests
   end
 
-  def summary_text
-    result = "#{@name}\n"
-    return result if @pull_requests.length == 0
-
-    leadtime = 0
-    @pull_requests.each do |pull_request|
-      text = <<~TEXT
-        - #{pull_request['title']} (lead time: #{lead_time(pull_request)} hour)
-      TEXT
-      result += text
-      leadtime += lead_time(pull_request)
-    end
-    leadtime /= @pull_requests.length
-    result += "average lead time: #{leadtime.floor(2)} hour"
-
-    result
-  end
-
   def lead_time(pull_request)
-    merged_at = Time.parse(pull_request['mergedAt'])
-    created_at = Time.parse(pull_request['createdAt'])
-
-    ((merged_at - created_at) / 3600).floor 2
+    PullRequest.new(data: pull_request).lead_time
   end
 end
 
