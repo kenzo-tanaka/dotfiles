@@ -40,7 +40,7 @@ class SampleTest < Minitest::Test
       "url" => "https://github.com/test/test/25515"
     }
     expected = 17.42
-    actual = Performance.new(name: 'test', pull_requests: {}).lead_time(pull_request)
+    actual = PullRequest.new(data: pull_request).lead_time
     assert_equal expected, actual
   end
 end
