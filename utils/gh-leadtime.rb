@@ -2,35 +2,38 @@ require 'json'
 require 'time'
 require 'optparse'
 
+class PullRequest
+  def initialize(data:)
+    @data = data
+  end
+
+  def lead_time
+    ((merged_at - created_at) / 3600).floor 2
+  end
+
+  def merged_at
+    Time.parse @data['mergedAt']
+  end
+
+  def created_at
+    Time.parse @data['createdAt']
+  end
+end
+
 class Performance
-  def initialize(name:, pull_requests:)
-    @name = name
+  def initialize(pull_requests:)
     @pull_requests = pull_requests
   end
 
-  def summary_text
-    result = "#{@name}\n"
-    return result if @pull_requests.length == 0
+  def average
+    return 0 if @pull_requests.length == 0
 
-    leadtime = 0
+    result = 0
     @pull_requests.each do |pull_request|
-      text = <<~TEXT
-        - #{pull_request['title']} (lead time: #{lead_time(pull_request)} hour)
-      TEXT
-      result += text
-      leadtime += lead_time(pull_request)
+      result += PullRequest.new(data: pull_request).lead_time
     end
-    leadtime /= @pull_requests.length
-    result += "average lead time: #{leadtime.floor(2)} hour"
 
-    result
-  end
-
-  def lead_time(pull_request)
-    merged_at = Time.parse(pull_request['mergedAt'])
-    created_at = Time.parse(pull_request['createdAt'])
-
-    ((merged_at - created_at) / 3600).floor 2
+    (result / @pull_requests.length).floor 2
   end
 end
 
@@ -46,10 +49,11 @@ users = options[:users].split(',')
 from = options[:from]
 to = options[:to]
 
+pulls = []
 users.each do |name|
   input = `gh pr list -A #{name} --search "merged:#{from}..#{to}" --state merged --json url,title,createdAt,mergedAt`
-  pull_requests = JSON.parse input
-  p = Performance.new(name: name, pull_requests: pull_requests)
-  puts p.summary_text
+  pulls << JSON.parse(input)
 end
 
+pulls.flatten!
+puts Performance.new(pull_requests: pulls).average
