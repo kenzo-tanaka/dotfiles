@@ -1,4 +1,6 @@
 require 'minitest/autorun'
+require 'json'
+require 'time'
 
 class Performance
   def initialize(name:, pull_requests:)
@@ -34,14 +36,14 @@ end
 
 class SampleTest < Minitest::Test
   def test_1
-    expected = true
-    actual = true
-    assert_equal expected, actual
-  end
-
-  def test_2
-    expected = true
-    actual = true
+    pull_request = {
+      "createdAt" => "2022-03-14T12:04:03Z",
+      "mergedAt" => "2022-03-15T05:29:21Z",
+      "title" => "Example pr",
+      "url" => "https://github.com/test/test/25515"
+    }
+    expected = 17.42
+    actual = Performance.new(name: 'test', pull_requests: {}).lead_time(pull_request)
     assert_equal expected, actual
   end
 end
