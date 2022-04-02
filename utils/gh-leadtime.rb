@@ -42,12 +42,14 @@ options = {}
 opt.on('-u', '--users USERS', 'user list') { |v| options[:users] = v }
 opt.on('-f', '--from DATE', 'from date') { |v| options[:from] = v }
 opt.on('-t', '--to DATE', 'to date') { |v| options[:to] = v }
+opt.on('-r', '--res RESPONSE', 'response') { |v| options[:res] = v }
 opt.parse(ARGV)
 
 # コミッターをコマンドライン引数から取得
 users = options[:users].split(',')
 from = options[:from]
 to = options[:to]
+res = options[:res]
 
 pulls = []
 users.each do |name|
@@ -56,4 +58,4 @@ users.each do |name|
 end
 
 pulls.flatten!
-puts Performance.new(pull_requests: pulls).average
+puts res == 'count'? pulls.length : Performance.new(pull_requests: pull).average
