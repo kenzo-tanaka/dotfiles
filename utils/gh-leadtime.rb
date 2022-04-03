@@ -11,6 +11,8 @@ class PullRequest
     ((merged_at - created_at) / 3600).floor 2
   end
 
+  private
+
   def merged_at
     Time.parse @data['mergedAt']
   end
