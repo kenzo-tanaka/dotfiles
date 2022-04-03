@@ -58,4 +58,4 @@ users.each do |name|
 end
 
 pulls.flatten!
-puts res == 'count'? pulls.length : Performance.new(pull_requests: pull).average
+puts res == 'count'? pulls.length : Performance.new(pull_requests: pulls).average
