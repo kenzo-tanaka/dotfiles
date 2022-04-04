@@ -21,8 +21,8 @@ class PullRequest
 
   def weekend_seconds
     seconds = 0
-    Range.new(created_at.to_date, merged_at.to_date).to_a.each do |day|
-      seconds += 86400 if day.wday == 0 || day.wday == 6 || HolidayJapan.check(day)
+    Range.new(created_at.to_date, merged_at.to_date).to_a.each do |date|
+      seconds += 86400 if date.wday == 0 || date.wday == 6 || HolidayJapan.check(date)
     end
     seconds
   end
