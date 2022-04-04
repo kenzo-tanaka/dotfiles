@@ -1,6 +1,7 @@
 require 'minitest/autorun'
 require 'json'
 require 'time'
+require 'bundler/inline'
 
 class PullRequest
   def initialize(data:)
@@ -78,19 +79,21 @@ class PerformanceTest < Minitest::Test
   def test_average
     pull_requests = [
       {
-        "createdAt" => "2022-03-14T12:04:03Z",
-        "mergedAt" => "2022-03-15T05:29:21Z",
+        "createdAt" => "2022-03-14T15:00:00Z",
+        "mergedAt" => "2022-03-15T05:00:00Z",
         "title" => "Example pr",
         "url" => "https://github.com/test/test/pull/99"
       },
       {
-        "createdAt" => "2022-03-10T08:06:16Z",
-        "mergedAt" => "2022-03-15T01:46:15Z",
-        "title" => "Example pr 2",
-        "url" => "https://github.com/test/test/pull/100"
+        "createdAt" => "2022-03-11T03:00:00Z",
+        "mergedAt" => "2022-03-14T05:00:00Z",
+        "title" => "Example pr",
+        "url" => "https://github.com/test/test/pull/99"
       }
     ]
-    expected = 65.53
+
+    # (14 + 26) / 2
+    expected = 20.0
     actual = Performance.new(pull_requests: pull_requests).average
     assert_equal expected, actual
   end
