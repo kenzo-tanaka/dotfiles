@@ -8,17 +8,25 @@ class PullRequest
   end
 
   def lead_time
-    ((merged_at - created_at) / 3600).floor 2
+    ((merged_at - created_at - weekend_seconds) / 3600).floor 2
   end
 
   private
 
+  def weekend_seconds
+    seconds = 0
+    Range.new(created_at.to_date, merged_at.to_date).to_a.each do |day|
+      seconds += 86400 if day.wday == 0 || day.wday == 6
+    end
+    seconds
+  end
+
   def merged_at
-    Time.parse @data['mergedAt']
+    Time.parse(@data['mergedAt']).getlocal
   end
 
   def created_at
-    Time.parse @data['createdAt']
+    Time.parse(@data['createdAt']).getlocal
   end
 end
 
