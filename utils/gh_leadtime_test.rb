@@ -3,6 +3,11 @@ require 'json'
 require 'time'
 require 'bundler/inline'
 
+gemfile do
+  source 'https://rubygems.org'
+  gem 'holiday_japan'
+end
+
 class PullRequest
   def initialize(data:)
     @data = data
