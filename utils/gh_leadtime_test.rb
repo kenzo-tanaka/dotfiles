@@ -78,6 +78,21 @@ class PullRequestTest < Minitest::Test
     actual = PullRequest.new(data: pull_request).lead_time
     assert_equal expected, actual
   end
+
+  # 祝日、土日を1回挟む場合
+  def test_leadtime_with_holiday
+    pull_request = {
+      "createdAt" => "2022-02-10T03:00:00Z",
+      "mergedAt" => "2022-02-14T05:00:00Z",
+      "title" => "Example pr",
+      "url" => "https://github.com/test/test/pull/99"
+    }
+    # 12 + 14
+    # 2/11は祝日なので除外する
+    expected = 26.0
+    actual = PullRequest.new(data: pull_request).lead_time
+    assert_equal expected, actual
+  end
 end
 
 class PerformanceTest < Minitest::Test
