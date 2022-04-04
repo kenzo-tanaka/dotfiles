@@ -38,12 +38,12 @@ end
 class PullRequestTest < Minitest::Test
   def test_leadtime
     pull_request = {
-      "createdAt" => "2022-03-14T12:04:03Z",
-      "mergedAt" => "2022-03-15T05:29:21Z",
+      "createdAt" => "2022-03-14T15:00:00Z",
+      "mergedAt" => "2022-03-15T05:00:00Z",
       "title" => "Example pr",
       "url" => "https://github.com/test/test/pull/99"
     }
-    expected = 17.42
+    expected = 14.0
     actual = PullRequest.new(data: pull_request).lead_time
     assert_equal expected, actual
   end
