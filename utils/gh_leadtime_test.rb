@@ -14,6 +14,7 @@ class PullRequest
     (@lead_time / 3600).floor(2)
   end
 
+  # TODO: weekendのsecondを返すメソッドにする
   def rm_weekend
     arr = Range.new(@created_at.to_date, @merged_at.to_date).to_a
     arr.each do |day|
