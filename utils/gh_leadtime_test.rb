@@ -12,11 +12,11 @@ class PullRequest
   end
 
   def merged_at
-    Time.parse @data['mergedAt']
+    Time.parse(@data['mergedAt']).getlocal
   end
 
   def created_at
-    Time.parse @data['createdAt']
+    Time.parse(@data['createdAt']).getlocal
   end
 end
 
