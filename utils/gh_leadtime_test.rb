@@ -35,25 +35,6 @@ class Performance
   end
 end
 
-class LeadTime
-  def initialize(utc_created_at:, utc_merge_at:)
-    @created_at = utc_created_at
-    @merged_at = utc_merge_at
-  end
-
-  def calculate
-    10.0
-  end
-end
-
-class LeadTimeTest < Minitest::Test
-  def test_leadtime
-    expected = 10.0
-    actual = LeadTime.new(utc_created_at: '', utc_merge_at: '').calculate
-    assert_equal expected, actual
-  end
-end
-
 class PullRequestTest < Minitest::Test
   def test_leadtime
     pull_request = {
