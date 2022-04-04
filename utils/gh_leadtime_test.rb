@@ -8,15 +8,25 @@ class PullRequest
   end
 
   def lead_time
-    ((merged_at - created_at) / 3600).floor 2
+    @lead_time = merged_at - created_at
+    rm_weekend
+
+    (@lead_time / 3600).floor(2)
+  end
+
+  def rm_weekend
+    arr = Range.new(@created_at.to_date, @merged_at.to_date).to_a
+    arr.each do |day|
+      @lead_time -= 86400 if day.wday == 0 || day.wday == 6
+    end
   end
 
   def merged_at
-    Time.parse(@data['mergedAt']).getlocal
+    @merged_at = Time.parse(@data['mergedAt']).getlocal
   end
 
   def created_at
-    Time.parse(@data['createdAt']).getlocal
+    @created_at = Time.parse(@data['createdAt']).getlocal
   end
 end
 
@@ -52,12 +62,13 @@ class PullRequestTest < Minitest::Test
   # 土日を1回挟む場合
   def test_leadtime2
     pull_request = {
-      "createdAt" => "2022-03-11T15:00:00Z",
+      "createdAt" => "2022-03-11T03:00:00Z",
       "mergedAt" => "2022-03-14T05:00:00Z",
       "title" => "Example pr",
       "url" => "https://github.com/test/test/pull/99"
     }
-    expected = 14.0
+    # 12 + 14
+    expected = 26.0
     actual = PullRequest.new(data: pull_request).lead_time
     assert_equal expected, actual
   end
