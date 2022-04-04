@@ -36,6 +36,7 @@ class Performance
 end
 
 class PullRequestTest < Minitest::Test
+  # 平日間の場合
   def test_leadtime
     pull_request = {
       "createdAt" => "2022-03-14T15:00:00Z",
@@ -48,7 +49,20 @@ class PullRequestTest < Minitest::Test
     assert_equal expected, actual
   end
 
+  # 土日を1回挟む場合
   def test_leadtime2
+    pull_request = {
+      "createdAt" => "2022-03-11T15:00:00Z",
+      "mergedAt" => "2022-03-14T05:00:00Z",
+      "title" => "Example pr",
+      "url" => "https://github.com/test/test/pull/99"
+    }
+    expected = 14.0
+    actual = PullRequest.new(data: pull_request).lead_time
+    assert_equal expected, actual
+  end
+
+  def test_leadtime3
     pull_request = {
       "createdAt" => "2022-03-10T08:06:16Z",
       "mergedAt" => "2022-03-15T01:46:15Z",
