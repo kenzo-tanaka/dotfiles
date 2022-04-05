@@ -1,6 +1,12 @@
 require 'json'
 require 'time'
 require 'optparse'
+require 'bundler/inline'
+
+gemfile do
+  source 'https://rubygems.org'
+  gem 'holiday_japan'
+end
 
 class PullRequest
   def initialize(data:)
@@ -8,15 +14,15 @@ class PullRequest
   end
 
   def lead_time
-    ((merged_at - created_at - weekend_seconds) / 3600).floor 2
+    ((merged_at - created_at - weekend_and_holiday) / 3600).floor 2
   end
 
   private
 
-  def weekend_seconds
+  def weekend_and_holiday
     seconds = 0
-    Range.new(created_at.to_date, merged_at.to_date).to_a.each do |day|
-      seconds += 86400 if day.wday == 0 || day.wday == 6
+    Range.new(created_at.to_date, merged_at.to_date).to_a.each do |date|
+      seconds += 86400 if date.wday == 0 || date.wday == 6 || HolidayJapan.check(date)
     end
     seconds
   end
