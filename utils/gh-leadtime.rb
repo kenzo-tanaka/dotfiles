@@ -75,7 +75,7 @@ class PullRequest
   end
 
   def exec_query(pull_num)
-    GitHubAPI::Client.query(QUERY, variables: { number: pull_num, owner: 'kenzo-tanaka', name: 'dotfiles' })
+    GitHubAPI::Client.query(QUERY, variables: { number: pull_num, owner: ENV['OWNER'], name: ENV['REPO'] })
   end
 end
 
@@ -113,8 +113,6 @@ opt.on('-u', '--users USERS', 'user list') { |v| options[:users] = v }
 opt.on('-b', '--base BRANCH', 'base branch') { |v| options[:base] = v }
 opt.on('-f', '--from DATE', 'from date') { |v| options[:from] = v }
 opt.on('-t', '--to DATE', 'to date') { |v| options[:to] = v }
-opt.on('-o', '--owner OWNER', 'owner name') { |v| options[:owner] = v }
-opt.on('-n', '--name NAME', 'repository name') { |v| options[:repo] = v }
 opt.parse(ARGV)
 
 # コミッターをコマンドライン引数から取得
@@ -122,8 +120,6 @@ users = options[:users].split(',')
 from = options[:from]
 to = options[:to]
 base = options[:base]
-owner = options[:owner]
-repo = options[:repo]
 
 pulls = []
 users.each do |name|
