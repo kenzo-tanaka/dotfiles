@@ -97,6 +97,7 @@ end
 opt = OptionParser.new
 options = {}
 opt.on('-u', '--users USERS', 'user list') { |v| options[:users] = v }
+opt.on('-b', '--base BRANCH', 'base branch') { |v| options[:base] = v }
 opt.on('-f', '--from DATE', 'from date') { |v| options[:from] = v }
 opt.on('-t', '--to DATE', 'to date') { |v| options[:to] = v }
 opt.on('-r', '--res RESPONSE', 'response') { |v| options[:res] = v }
@@ -107,10 +108,11 @@ users = options[:users].split(',')
 from = options[:from]
 to = options[:to]
 res = options[:res]
+base = options[:base]
 
 pulls = []
 users.each do |name|
-  input = `gh pr list -A #{name} --search "merged:#{from}..#{to} base:develop" --state merged --json url,title,createdAt,mergedAt,number`
+  input = `gh pr list -A #{name} --search "merged:#{from}..#{to} base:#{base}" --state merged --json url,title,createdAt,mergedAt,number`
   pulls << JSON.parse(input)
 end
 
