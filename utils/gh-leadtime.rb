@@ -110,18 +110,13 @@ end
 opt = OptionParser.new
 options = {}
 opt.on('-u', '--users USERS', 'user list') { |v| options[:users] = v }
-opt.on('-f', '--from DATE', 'from date') { |v| options[:from] = v }
-opt.on('-t', '--to DATE', 'to date') { |v| options[:to] = v }
 opt.parse(ARGV)
 
 # コミッターをコマンドライン引数から取得
 users = options[:users].split(',')
-from = options[:from]
-to = options[:to]
-
 pulls = []
 users.each do |name|
-  input = `gh pr list -A #{name} --search "merged:#{from}..#{to} base:#{ENV['BASE']}" --state merged --json url,title,createdAt,mergedAt,number`
+  input = `gh pr list -A #{name} --search "merged:#{ENV['FROM']}..#{ENV['TO']} base:#{ENV['BASE']}" --state merged --json url,title,createdAt,mergedAt,number`
   pulls << JSON.parse(input)
 end
 
