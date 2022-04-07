@@ -12,31 +12,6 @@ end
 require 'graphql/client'
 require 'graphql/client/http'
 
-def exec_query(pull_num:)
-  http = GraphQL::Client::HTTP.new('https://api.github.com/graphql') do
-    def headers(context)
-      {
-        "Authorization" => "Bearer #{ENV['ACCESS_TOKEN']}"
-      }
-    end
-  end
-  schema = GraphQL::Client.load_schema(http)
-  client = GraphQL::Client.new(schema: schema, execute: http)
-  query = client.parse <<-GraphQL
-    query {
-      repository(owner: "kenzo-tanaka", name: "rails_sandbox") {
-        pullRequest(number: #{pull_num}) {
-          createdAt
-          mergedAt
-          additions
-          deletions
-        }
-      }
-    }
-  GraphQL
-
-  client.query(query)
-end
 
 class PullRequest
   def initialize(data:)
@@ -45,6 +20,11 @@ class PullRequest
 
   def lead_time
     ((merged_at - created_at - weekend_and_holiday) / 3600).floor 2
+  end
+
+  def diff
+    res = exec_query(number)
+    res.data.repository.pull_request.addtions + res.data.repository.pull_request.deletions
   end
 
   private
@@ -57,12 +37,43 @@ class PullRequest
     seconds
   end
 
+  def number
+    @data['number']
+  end
+
   def merged_at
     Time.parse(@data['mergedAt']).getlocal
   end
 
   def created_at
     Time.parse(@data['createdAt']).getlocal
+  end
+
+  # TODO: リファクタ
+  def exec_query(pull_num)
+    http = GraphQL::Client::HTTP.new('https://api.github.com/graphql') do
+      def headers(context)
+        {
+          "Authorization" => "Bearer #{ENV['ACCESS_TOKEN']}"
+        }
+      end
+    end
+    schema = GraphQL::Client.load_schema(http)
+    client = GraphQL::Client.new(schema: schema, execute: http)
+    query = client.parse <<-GraphQL
+    query {
+      repository(owner: "kenzo-tanaka", name: "rails_sandbox") {
+        pullRequest(number: #{pull_num}) {
+          createdAt
+          mergedAt
+          additions
+          deletions
+        }
+      }
+    }
+    GraphQL
+
+    client.query(query)
   end
 end
 
