@@ -60,6 +60,7 @@ class PullRequest
     end
     schema = GraphQL::Client.load_schema(http)
     client = GraphQL::Client.new(schema: schema, execute: http)
+    # TODO: 定数で定義する必要がある
     query = client.parse <<-GraphQL
     query {
       repository(owner: "kenzo-tanaka", name: "rails_sandbox") {
@@ -92,6 +93,17 @@ class Performance
 
     (result / @pull_requests.length).floor 2
   end
+
+  def diff_average
+    return 0 if @pull_requests.length == 0
+
+    result = 0
+    @pull_requests.each do |pull|
+      result += PullRequest.new(data: pull).diff
+    end
+
+    result
+  end
 end
 
 opt = OptionParser.new
@@ -117,4 +129,4 @@ users.each do |name|
 end
 
 pulls.flatten!
-puts "pulls: #{pulls.length}, leadtime: #{Performance.new(pull_requests: pulls).average}"
+puts "pulls: #{pulls.length}, leadtime: #{Performance.new(pull_requests: pulls).average}, diff_average: #{Performance.new(pull_requests: pulls).diff_average}"
