@@ -27,8 +27,8 @@ end
 
 class PullRequest
   QUERY = GitHubAPI::Client.parse <<-GraphQL
-    query($number: Int!) {
-      repository(owner: "kenzo-tanaka", name: "dotfiles") {
+    query($number: Int!, $owner: String!, $name: String!) {
+      repository(owner: $owner, name: $name) {
         pullRequest(number: $number) {
           createdAt
           mergedAt
@@ -75,7 +75,7 @@ class PullRequest
   end
 
   def exec_query(pull_num)
-    GitHubAPI::Client.query(QUERY, variables: { number: pull_num })
+    GitHubAPI::Client.query(QUERY, variables: { number: pull_num, owner: ENV['OWNER'], name: ENV['REPO'] })
   end
 end
 
@@ -114,7 +114,6 @@ opt.parse(ARGV)
 
 # コミッターをコマンドライン引数から取得
 users = options[:users].split(',')
-
 pulls = []
 users.each do |name|
   input = `gh pr list -A #{name} --search "merged:#{ENV['FROM']}..#{ENV['TO']} base:#{ENV['BASE']}" --state merged --json url,title,createdAt,mergedAt,number`
