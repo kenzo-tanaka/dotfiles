@@ -12,8 +12,33 @@ end
 require 'graphql/client'
 require 'graphql/client/http'
 
+module GitHubAPI
+  HTTP = GraphQL::Client::HTTP.new('https://api.github.com/graphql') do
+    def headers(context)
+      {
+        "Authorization" => "Bearer #{ENV['ACCESS_TOKEN']}"
+      }
+    end
+  end
+
+  Schema = GraphQL::Client.load_schema(HTTP)
+  Client = GraphQL::Client.new(schema: Schema, execute: HTTP)
+end
 
 class PullRequest
+  QUERY = GitHubAPI::Client.parse <<-GraphQL
+    query($number: Int!) {
+      repository(owner: "kenzo-tanaka", name: "dotfiles") {
+        pullRequest(number: $number) {
+          createdAt
+          mergedAt
+          additions
+          deletions
+        }
+      }
+  }
+  GraphQL
+
   def initialize(data:)
     @data = data
   end
@@ -24,7 +49,7 @@ class PullRequest
 
   def diff
     res = exec_query(number)
-    res.data.repository.pull_request.addtions + res.data.repository.pull_request.deletions
+    res.data.repository.pull_request.additions + res.data.repository.pull_request.deletions
   end
 
   private
@@ -49,32 +74,8 @@ class PullRequest
     Time.parse(@data['createdAt']).getlocal
   end
 
-  # TODO: リファクタ
   def exec_query(pull_num)
-    http = GraphQL::Client::HTTP.new('https://api.github.com/graphql') do
-      def headers(context)
-        {
-          "Authorization" => "Bearer #{ENV['ACCESS_TOKEN']}"
-        }
-      end
-    end
-    schema = GraphQL::Client.load_schema(http)
-    client = GraphQL::Client.new(schema: schema, execute: http)
-    # TODO: 定数で定義する必要がある
-    query = client.parse <<-GraphQL
-    query {
-      repository(owner: "kenzo-tanaka", name: "rails_sandbox") {
-        pullRequest(number: #{pull_num}) {
-          createdAt
-          mergedAt
-          additions
-          deletions
-        }
-      }
-    }
-    GraphQL
-
-    client.query(query)
+    GitHubAPI::Client.query(QUERY, variables: { number: pull_num })
   end
 end
 
@@ -102,7 +103,7 @@ class Performance
       result += PullRequest.new(data: pull).diff
     end
 
-    result
+    (result / @pull_requests.length).floor 2
   end
 end
 
