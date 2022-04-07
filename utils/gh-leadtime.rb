@@ -6,6 +6,7 @@ require 'bundler/inline'
 gemfile do
   source 'https://rubygems.org'
   gem 'holiday_japan'
+  gem 'graphql-client'
 end
 
 class PullRequest
