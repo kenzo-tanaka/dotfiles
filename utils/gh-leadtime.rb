@@ -99,7 +99,7 @@ res = options[:res]
 
 pulls = []
 users.each do |name|
-  input = `gh pr list -A #{name} --search "merged:#{from}..#{to} base:develop" --state merged --json url,title,createdAt,mergedAt`
+  input = `gh pr list -A #{name} --search "merged:#{from}..#{to} base:develop" --state merged --json url,title,createdAt,mergedAt,number`
   pulls << JSON.parse(input)
 end
 
