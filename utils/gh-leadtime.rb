@@ -74,4 +74,4 @@ users.each do |name|
 end
 
 pulls.flatten!
-puts res == 'count'? pulls.length : Performance.new(pull_requests: pulls).average
+puts "pulls: #{pulls.length}, leadtime: #{Performance.new(pull_requests: pulls).average}"
