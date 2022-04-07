@@ -9,6 +9,35 @@ gemfile do
   gem 'graphql-client'
 end
 
+require 'graphql/client'
+require 'graphql/client/http'
+
+def exec_query(pull_num:)
+  http = GraphQL::Client::HTTP.new('https://api.github.com/graphql') do
+    def headers(context)
+      {
+        "Authorization" => "Bearer #{ENV['ACCESS_TOKEN']}"
+      }
+    end
+  end
+  schema = GraphQL::Client.load_schema(http)
+  client = GraphQL::Client.new(schema: schema, execute: http)
+  query = client.parse <<-GraphQL
+    query {
+      repository(owner: "kenzo-tanaka", name: "rails_sandbox") {
+        pullRequest(number: #{pull_num}) {
+          createdAt
+          mergedAt
+          additions
+          deletions
+        }
+      }
+    }
+  GraphQL
+
+  client.query(query)
+end
+
 class PullRequest
   def initialize(data:)
     @data = data
