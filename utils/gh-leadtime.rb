@@ -48,11 +48,11 @@ class PullRequest
   end
 
   def merged_at
-    Time.parse(@data.merged_at).getlocal
+    @merged_at ||= Time.parse(@data.merged_at).getlocal
   end
 
   def created_at
-    Time.parse(@data.created_at).getlocal
+    @created_at ||= Time.parse(@data.created_at).getlocal
   end
 
   def additions
