@@ -1,6 +1,5 @@
 require 'json'
 require 'time'
-require 'optparse'
 require 'bundler/inline'
 
 gemfile do
