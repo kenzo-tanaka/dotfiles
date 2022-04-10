@@ -117,12 +117,13 @@ class PullRequests
     }
   GraphQL
 
-  def initialize(org:, repo:, assignee:, from:, to:)
+  def initialize(org:, repo:, assignee:, from:, to:, base:)
     @org = org
     @repo = repo
     @assignee = assignee
     @from = from
     @to = to
+    @base = base
   end
 
   # TODO: 既存実装の動作確認のため一旦Hash化,本来はHashにする必要がないのであとで直す
@@ -133,6 +134,7 @@ class PullRequests
     res.data.search.nodes.each do |node|
       result << {
         'number' => node.number,
+        'title' => node.title,
         'mergedAt' => node.merged_at,
         'createdAt' => node.created_at,
         'additions' => node.additions,
@@ -144,7 +146,7 @@ class PullRequests
   end
 
   def query
-    "org:#{@org} is:pr is:merged repo:#{@org}/#{@repo} assignee:#{@assignee} merged:#{@from}..#{@to}"
+    "is:pr is:merged repo:#{@org}/#{@repo} author:#{@assignee} merged:#{@from}..#{@to} base:#{@base}"
   end
 
   def exec_query
@@ -156,9 +158,10 @@ end
 users = ENV['USERS'].split(',')
 pulls = []
 users.each do |name|
-  hash = PullRequests.new(assignee: name, repo: ENV['REPO'], from: ENV['FROM'], to: ENV['TO'], org: ENV['OWNER']).hash
+  hash = PullRequests.new(assignee: name, repo: ENV['REPO'], from: ENV['FROM'], to: ENV['TO'], org: ENV['OWNER'], base: ENV['BASE']).hash
   pulls << hash
 end
 
 pulls.flatten!
+p pulls
 puts "pulls: #{pulls.length}, leadtime: #{Performance.new(pull_requests: pulls).average}, diff_average: #{Performance.new(pull_requests: pulls).diff_average}"
