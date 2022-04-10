@@ -163,5 +163,4 @@ users.each do |name|
 end
 
 pulls.flatten!
-p pulls
 puts "pulls: #{pulls.length}, leadtime: #{Performance.new(pull_requests: pulls).average}, diff_average: #{Performance.new(pull_requests: pulls).diff_average}"
