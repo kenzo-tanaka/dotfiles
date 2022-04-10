@@ -48,8 +48,9 @@ class PullRequest
   end
 
   def diff
-    res = exec_query(number)
-    res.data.repository.pull_request.additions + res.data.repository.pull_request.deletions
+    # res = exec_query(number)
+    # res.data.repository.pull_request.additions + res.data.repository.pull_request.deletions
+    additions + deletions
   end
 
   private
@@ -72,6 +73,14 @@ class PullRequest
 
   def created_at
     Time.parse(@data['createdAt']).getlocal
+  end
+
+  def additions
+    @data['additions']
+  end
+
+  def deletions
+    @data['deletions']
   end
 
   def exec_query(pull_num)
@@ -171,6 +180,4 @@ users.each do |name|
 end
 
 pulls.flatten!
-p pulls
-
-# puts "pulls: #{pulls.length}, leadtime: #{Performance.new(pull_requests: pulls).average}, diff_average: #{Performance.new(pull_requests: pulls).diff_average}"
+puts "pulls: #{pulls.length}, leadtime: #{Performance.new(pull_requests: pulls).average}, diff_average: #{Performance.new(pull_requests: pulls).diff_average}"
