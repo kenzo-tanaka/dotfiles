@@ -26,19 +26,6 @@ module GitHubAPI
 end
 
 class PullRequest
-  QUERY = GitHubAPI::Client.parse <<-GraphQL
-    query($number: Int!, $owner: String!, $name: String!) {
-      repository(owner: $owner, name: $name) {
-        pullRequest(number: $number) {
-          createdAt
-          mergedAt
-          additions
-          deletions
-        }
-      }
-  }
-  GraphQL
-
   def initialize(data:)
     @data = data
   end
@@ -48,8 +35,7 @@ class PullRequest
   end
 
   def diff
-    res = exec_query(number)
-    res.data.repository.pull_request.additions + res.data.repository.pull_request.deletions
+    additions + deletions
   end
 
   private
@@ -74,8 +60,12 @@ class PullRequest
     Time.parse(@data['createdAt']).getlocal
   end
 
-  def exec_query(pull_num)
-    GitHubAPI::Client.query(QUERY, variables: { number: pull_num, owner: ENV['OWNER'], name: ENV['REPO'] })
+  def additions
+    @data['additions']
+  end
+
+  def deletions
+    @data['deletions']
   end
 end
 
@@ -107,12 +97,69 @@ class Performance
   end
 end
 
+class PullRequests
+  QUERY = GitHubAPI::Client.parse <<-GraphQL
+    query($query: String!) {
+      search(type: ISSUE, query: $query, first: 100) {
+        nodes {
+          ... on PullRequest {
+            id
+            title
+            url
+            number
+            createdAt
+            mergedAt
+            deletions
+            additions
+          }
+        }
+      }
+    }
+  GraphQL
+
+  def initialize(org:, repo:, assignee:, from:, to:, base:)
+    @org = org
+    @repo = repo
+    @assignee = assignee
+    @from = from
+    @to = to
+    @base = base
+  end
+
+  # TODO: 既存実装の動作確認のため一旦Hash化,本来はHashにする必要がないのであとで直す
+  def hash
+    res = exec_query
+    result = []
+
+    res.data.search.nodes.each do |node|
+      result << {
+        'number' => node.number,
+        'title' => node.title,
+        'mergedAt' => node.merged_at,
+        'createdAt' => node.created_at,
+        'additions' => node.additions,
+        'deletions' => node.deletions
+      }
+    end
+
+    result
+  end
+
+  def query
+    "is:pr is:merged repo:#{@org}/#{@repo} author:#{@assignee} merged:#{@from}..#{@to} base:#{@base}"
+  end
+
+  def exec_query
+    GitHubAPI::Client.query(QUERY, variables: { query: query })
+  end
+end
+
 # コミッターをコマンドライン引数から取得
 users = ENV['USERS'].split(',')
 pulls = []
 users.each do |name|
-  input = `gh pr list -A #{name} --search "merged:#{ENV['FROM']}..#{ENV['TO']} base:#{ENV['BASE']}" --state merged --json url,title,createdAt,mergedAt,number`
-  pulls << JSON.parse(input)
+  hash = PullRequests.new(assignee: name, repo: ENV['REPO'], from: ENV['FROM'], to: ENV['TO'], org: ENV['OWNER'], base: ENV['BASE']).hash
+  pulls << hash
 end
 
 pulls.flatten!
