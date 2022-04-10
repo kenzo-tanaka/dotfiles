@@ -26,19 +26,6 @@ module GitHubAPI
 end
 
 class PullRequest
-  QUERY = GitHubAPI::Client.parse <<-GraphQL
-    query($number: Int!, $owner: String!, $name: String!) {
-      repository(owner: $owner, name: $name) {
-        pullRequest(number: $number) {
-          createdAt
-          mergedAt
-          additions
-          deletions
-        }
-      }
-  }
-  GraphQL
-
   def initialize(data:)
     @data = data
   end
@@ -48,8 +35,6 @@ class PullRequest
   end
 
   def diff
-    # res = exec_query(number)
-    # res.data.repository.pull_request.additions + res.data.repository.pull_request.deletions
     additions + deletions
   end
 
@@ -81,10 +66,6 @@ class PullRequest
 
   def deletions
     @data['deletions']
-  end
-
-  def exec_query(pull_num)
-    GitHubAPI::Client.query(QUERY, variables: { number: pull_num, owner: ENV['OWNER'], name: ENV['REPO'] })
   end
 end
 
