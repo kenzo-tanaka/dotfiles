@@ -107,6 +107,42 @@ class Performance
   end
 end
 
+class PullRequests
+  QUERY = GitHubAPI::Client.parse <<-GraphQL
+    query($query: String!) {
+      search(type: ISSUE, query: $query, first: 100) {
+        nodes {
+          ... on PullRequest {
+            id
+            title
+            url
+            number
+            createdAt
+            mergedAt
+            deletions
+            additions
+          }
+        }
+      }
+    }
+  GraphQL
+
+  def initialize(org:, assignee:, from:, to:)
+    @org = org
+    @assignee = assignee
+    @from = from
+    @to = to
+  end
+
+  def query
+    "org:#{@org} is:pr is:merged assignee:#{@assignee} merged:#{@from}..#{@to}"
+  end
+
+  def exec_query
+    GitHubAPI::Client.query(QUERY, variables: { query: query })
+  end
+end
+
 # コミッターをコマンドライン引数から取得
 users = ENV['USERS'].split(',')
 pulls = []
