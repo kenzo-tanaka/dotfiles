@@ -103,10 +103,6 @@ class PullRequests
       search(type: ISSUE, query: $query, first: 100) {
         nodes {
           ... on PullRequest {
-            id
-            title
-            url
-            number
             createdAt
             mergedAt
             deletions
