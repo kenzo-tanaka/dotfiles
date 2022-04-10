@@ -144,7 +144,9 @@ class PullRequests
       result << {
         'number' => node.number,
         'mergedAt' => node.merged_at,
-        'createdAt' => node.created_at
+        'createdAt' => node.created_at,
+        'additions' => node.additions,
+        'deletions' => node.deletions
       }
     end
 
@@ -169,4 +171,6 @@ users.each do |name|
 end
 
 pulls.flatten!
-puts "pulls: #{pulls.length}, leadtime: #{Performance.new(pull_requests: pulls).average}, diff_average: #{Performance.new(pull_requests: pulls).diff_average}"
+p pulls
+
+# puts "pulls: #{pulls.length}, leadtime: #{Performance.new(pull_requests: pulls).average}, diff_average: #{Performance.new(pull_requests: pulls).diff_average}"
