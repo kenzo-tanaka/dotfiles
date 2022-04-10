@@ -47,10 +47,6 @@ class PullRequest
     seconds
   end
 
-  def number
-    @data.number
-  end
-
   def merged_at
     Time.parse(@data.merged_at).getlocal
   end
