@@ -49,23 +49,23 @@ class PullRequest
   end
 
   def number
-    @data['number']
+    @data.number
   end
 
   def merged_at
-    Time.parse(@data['mergedAt']).getlocal
+    Time.parse(@data.merged_at).getlocal
   end
 
   def created_at
-    Time.parse(@data['createdAt']).getlocal
+    Time.parse(@data.created_at).getlocal
   end
 
   def additions
-    @data['additions']
+    @data.additions
   end
 
   def deletions
-    @data['deletions']
+    @data.deletions
   end
 end
 
@@ -126,22 +126,11 @@ class PullRequests
     @base = base
   end
 
-  # TODO: 既存実装の動作確認のため一旦Hash化,本来はHashにする必要がないのであとで直す
-  def hash
+  def data
     res = exec_query
     result = []
 
-    res.data.search.nodes.each do |node|
-      result << {
-        'number' => node.number,
-        'title' => node.title,
-        'mergedAt' => node.merged_at,
-        'createdAt' => node.created_at,
-        'additions' => node.additions,
-        'deletions' => node.deletions
-      }
-    end
-
+    res.data.search.nodes.each { result << _1 }
     result
   end
 
@@ -158,8 +147,8 @@ end
 users = ENV['USERS'].split(',')
 pulls = []
 users.each do |name|
-  hash = PullRequests.new(assignee: name, repo: ENV['REPO'], from: ENV['FROM'], to: ENV['TO'], org: ENV['OWNER'], base: ENV['BASE']).hash
-  pulls << hash
+  pull = PullRequests.new(assignee: name, repo: ENV['REPO'], from: ENV['FROM'], to: ENV['TO'], org: ENV['OWNER'], base: ENV['BASE']).data
+  pulls << pull
 end
 
 pulls.flatten!
