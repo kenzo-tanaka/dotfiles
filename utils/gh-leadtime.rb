@@ -70,7 +70,7 @@ class Performance
   end
 
   # @return [Float] リードタイムの平均を返す
-  def average
+  def leadtime_average
     return 0 if @pull_requests.length == 0
 
     result = 0
@@ -148,4 +148,4 @@ users.each do |name|
 end
 
 pulls.flatten!
-puts "pulls: #{pulls.length}, leadtime: #{Performance.new(pull_requests: pulls).average}, diff_average: #{Performance.new(pull_requests: pulls).diff_average}"
+puts "pulls: #{pulls.length}, leadtime: #{Performance.new(pull_requests: pulls).leadtime_average}, diff_average: #{Performance.new(pull_requests: pulls).diff_average}"
