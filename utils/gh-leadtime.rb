@@ -128,6 +128,8 @@ class PullRequests
     result
   end
 
+  private
+
   def query
     "is:pr is:merged repo:#{@org}/#{@repo} author:#{@assignee} merged:#{@from}..#{@to} base:#{@base}"
   end
