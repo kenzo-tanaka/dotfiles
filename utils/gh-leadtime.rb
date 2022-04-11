@@ -65,27 +65,30 @@ class PullRequest
 end
 
 class Performance
+  # @param [Array<PullRequest>]
   def initialize(pull_requests:)
     @pull_requests = pull_requests
   end
 
-  def average
+  # @return [Float] リードタイムの平均を返す
+  def leadtime_average
     return 0 if @pull_requests.length == 0
 
     result = 0
     @pull_requests.each do |pull_request|
-      result += PullRequest.new(data: pull_request).lead_time
+      result += pull_request.lead_time
     end
 
     (result / @pull_requests.length).floor 2
   end
 
+  # @return [Integer] diffの平均を返す
   def diff_average
     return 0 if @pull_requests.length == 0
 
     result = 0
-    @pull_requests.each do |pull|
-      result += PullRequest.new(data: pull).diff
+    @pull_requests.each do |pull_request|
+      result += pull_request.diff
     end
 
     (result / @pull_requests.length).floor 2
@@ -117,13 +120,16 @@ class PullRequests
     @base = base
   end
 
+  # @return [Array<PullRequest>]
   def data
     res = exec_query
     result = []
 
-    res.data.search.nodes.each { result << _1 }
+    res.data.search.nodes.each { result << PullRequest.new(data: _1) }
     result
   end
+
+  private
 
   def query
     "is:pr is:merged repo:#{@org}/#{@repo} author:#{@assignee} merged:#{@from}..#{@to} base:#{@base}"
@@ -138,9 +144,9 @@ end
 users = ENV['USERS'].split(',')
 pulls = []
 users.each do |name|
-  pull = PullRequests.new(assignee: name, repo: ENV['REPO'], from: ENV['FROM'], to: ENV['TO'], org: ENV['OWNER'], base: ENV['BASE']).data
-  pulls << pull
+  pull_requests = PullRequests.new(assignee: name, repo: ENV['REPO'], from: ENV['FROM'], to: ENV['TO'], org: ENV['OWNER'], base: ENV['BASE']).data
+  pulls << pull_requests
 end
 
 pulls.flatten!
-puts "pulls: #{pulls.length}, leadtime: #{Performance.new(pull_requests: pulls).average}, diff_average: #{Performance.new(pull_requests: pulls).diff_average}"
+puts "pulls: #{pulls.length}, leadtime: #{Performance.new(pull_requests: pulls).leadtime_average}, diff_average: #{Performance.new(pull_requests: pulls).diff_average}"
