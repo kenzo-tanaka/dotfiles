@@ -65,6 +65,7 @@ class PullRequest
 end
 
 class Performance
+  # @param [Array<PullRequest>]
   def initialize(pull_requests:)
     @pull_requests = pull_requests
   end
