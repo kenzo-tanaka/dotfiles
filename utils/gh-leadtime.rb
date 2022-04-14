@@ -37,6 +37,10 @@ class PullRequest
     additions + deletions
   end
 
+  def number
+    @data.number
+  end
+
   private
 
   def weekend_and_holiday
@@ -101,6 +105,7 @@ class PullRequests
       search(type: ISSUE, query: $query, first: 100) {
         nodes {
           ... on PullRequest {
+            number
             createdAt
             mergedAt
             deletions
@@ -149,4 +154,6 @@ users.each do |name|
 end
 
 pulls.flatten!
-puts "pulls: #{pulls.length}, leadtime: #{Performance.new(pull_requests: pulls).leadtime_average}, diff_average: #{Performance.new(pull_requests: pulls).diff_average}"
+
+nums = pulls.map(&:number)
+puts "pulls: #{pulls.length}, nums: #{nums.join(' ')}, leadtime: #{Performance.new(pull_requests: pulls).leadtime_average}, diff_average: #{Performance.new(pull_requests: pulls).diff_average}"
