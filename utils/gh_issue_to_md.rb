@@ -53,6 +53,7 @@ class GhIssue
 end
 
 nodes = GhIssue.call
+dir = ENV['DIR'] ? ENV['DIR'] : '.'
 nodes.each do |node|
   md_body = <<~TEXT
     ---
@@ -63,6 +64,6 @@ nodes.each do |node|
     #{node.body}
   TEXT
 
-  File.open("gh-issue-#{node.number}.md", "w") { |f| f.print md_body }
+  File.open("#{dir}/gh-issue-#{node.number}.md", "w") { |f| f.print md_body }
 end
 
