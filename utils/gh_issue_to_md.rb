@@ -54,7 +54,8 @@ class GhIssue
 end
 
 nodes = GhIssue.call
-dir = ENV['DIR'] ? ENV['DIR'] : '.'
+root_dir = ENV['DIR'] ? ENV['DIR'] : '.'
+
 nodes.each do |node|
   md_body = <<~TEXT
     ---
@@ -65,6 +66,7 @@ nodes.each do |node|
     #{node.body}
   TEXT
 
-  File.open("#{dir}/gh-issue-#{node.number}.md", "w") { |f| f.print md_body }
+  dir = "#{root_dir}/gh_issue_#{node.number}"
+  Dir.mkdir(dir, 0777) unless Dir.exist?(dir)
+  File.open("#{dir}/index.md", "w") { |f| f.print md_body }
 end
-
