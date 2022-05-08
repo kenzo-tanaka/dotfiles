@@ -55,13 +55,12 @@ end
 nodes = GhIssue.call
 nodes.each do |node|
   md_body = <<~TEXT
-		---
-		title: '#{node.title}'
-		date: '#{node.updated_at}'
-		category: 'dev'
-		---
-
-		#{node.body}
+    ---
+    title: '#{node.title}'
+    date: '#{node.updated_at}'
+    category: 'dev'
+    ---
+    #{node.body}
   TEXT
 
   File.open("gh-issue-#{node.number}.md", "w") { |f| f.print md_body }
