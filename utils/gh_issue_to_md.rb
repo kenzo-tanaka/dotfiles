@@ -10,7 +10,8 @@ require 'graphql/client'
 require 'graphql/client/http'
 
 module GitHubAPI
-  HTTP = GraphQL::Client::HTTP.new('https://api.github.com/graphql') do
+  GITHUB_ENDPOINT = 'https://api.github.com/graphql'
+  HTTP = GraphQL::Client::HTTP.new(GITHUB_ENDPOINT) do
     def headers(context)
       {
         "Authorization" => "Bearer #{ENV['ACCESS_TOKEN']}"
