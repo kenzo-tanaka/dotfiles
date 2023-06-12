@@ -87,6 +87,9 @@ alias ann='bundle exec annotate'
 alias rc='bin/rails c'
 alias rs='bin/rails s'
 alias b='bundle exec'
+alias rspec='rbenv exec bundle exec rspec'
+alias rails='rbenv exec bundle exec rails'
+alias rubocop='rbenv exec bundle exec rubocop'
 
 ## ----------------------------------------
 ##  Python3
@@ -150,3 +153,4 @@ if (( $+commands[sw_vers] )) && (( $+commands[arch] )); then
 		exec arch -arch $arch /bin/zsh
 	}
 fi
+export PATH="$HOME/.anyenv/bin:$PATH"
