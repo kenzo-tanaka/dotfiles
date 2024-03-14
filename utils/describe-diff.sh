@@ -4,7 +4,7 @@ CURRENT_BRANCH=$(git branch --show-current)
 
 DIFF=$(git diff main..."$CURRENT_BRANCH")
 
-TEXT="あなたはプログラマーです。あなたはプログラマーです。
+TEXT="あなたはプログラマーです。
 以下のgit diffの差分を下記の出力形式に沿って、簡潔にまとめてください。
 
 # 出力言語
